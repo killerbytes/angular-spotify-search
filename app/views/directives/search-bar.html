@@ -1,0 +1,33 @@
+<div class="search-bar">
+  <input type="text" placeholder="Search..." ng-change="submit()" ng-model="query" ng-model-options="{ allowInvalid: true, debounce: 200 }">
+  <div ng-show="model" class="results">
+    <div ng-show="model.artists.items">
+      <h4>Artists</h4>
+      <ul>
+        <li ng-repeat="item in model.artists.items track by $index">
+           <a ng-href="#/artist/{{item.id}}">
+             <search-item item="item"></search-item>
+           </a>
+        </li>
+      </ul>
+
+
+      <div ng-if="model.artists.total > 5">
+        <a class="show-more" ng-if="button.artist" ng-click="more('artist')">Show more...</a>
+      </div>
+    </div>
+    <div ng-show="model.albums.items">
+      <h4>Albums</h4>
+      <ul>
+        <li ng-repeat="item in model.albums.items track by $index">
+          <div class="search-item">
+            <search-item item="item"></search-item>
+          </div>
+        </li>
+      </ul>
+      <div ng-if="model.albums.total > 5">
+        <a class="show-more" ng-if="button.album" ng-click="more('album')">Show more...</a>
+      </div>
+    </div>
+  </div>
+</div>

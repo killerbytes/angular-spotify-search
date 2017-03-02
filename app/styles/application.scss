@@ -1,0 +1,117 @@
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+$gray: #DDD;
+
+@import "components/loader";
+
+header{
+  .logo{
+    font-size: 30px;
+    margin: 1rem;
+  }
+}
+a{ cursor: pointer; }
+.main{
+  padding-top: 1rem;
+}
+.text-upper{
+  text-transform: capitalize;
+}
+.search-bar{
+  background-color: $gray;
+  padding: 1rem;
+  position: relative;
+  input{
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 18px;
+    border: 1px solid #DDD;
+  }
+  .results{
+    background-color: $gray;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    ul{
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      li{
+        background-color: lighten($gray, 10%);
+        margin-bottom: 2px;
+        .avatar{
+          border-radius: 100px;
+        }
+        a,
+        .search-item{
+          padding: 1rem;
+          display: block;
+          text-decoration: none;
+          color: #666;
+        }
+        .search-item{
+          .avatar{
+            border-radius: 0;
+          }
+
+        }
+        &:hover{
+          background-color: darken($gray, 10%);
+        }
+      }
+    }
+    .show-more{
+      text-align: center;
+      padding: 1rem;
+      background-color: #DDD;
+      display: block;
+    }
+  }
+}
+
+.avatar{
+  width: 50px;
+  height: 50px;
+  background-color: $gray;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  img{
+    width: 100%;
+    visibility: hidden;
+  }
+}
+
+.cover-photo{
+  position: relative;
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  img{
+    visibility: hidden;
+  }
+  h2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: rgba(0,0,0,.5);
+    margin: 0;
+    color: #FFF;
+    small{
+      float: right;
+      font-size: 16px;
+    }
+  }
+}
+
+.list-albums{
+  li{
+    margin-bottom: 2px;
+  }
+}

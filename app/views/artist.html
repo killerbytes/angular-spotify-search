@@ -1,0 +1,27 @@
+<div class="cover-photo" ng-style="{'background-image': 'url('+ model.images[0].url +')'}">
+  <img ng-src="{{model.images[0].url}}" alt="">
+  <h2>{{model.name}}</h2>
+</div>
+<p>
+
+</p>
+
+<ul class="list-unstyled list-albums">
+  <li ng-repeat="item in albums.items" class="search-item">
+    <div class="media">
+      <div class="media-left">
+        <div class="avatar" ng-style="{'background-image': 'url('+ item.images[2].url +')'}">
+          <img class="media-object" ng-src={{item.images[2].url}}>
+        </div>
+      </div>
+      <div class="media-body">
+        <strong class="media-heading">{{item.name}}</strong>
+        <div class="text-upper">{{ item.genres.join(", ") }}</div>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div ng-if="loading" class="loader"></div>
+
+<ul uib-pagination boundary-links="true" total-items="albums.total" max-size="albums.limit" ng-change="pageChanged()" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
