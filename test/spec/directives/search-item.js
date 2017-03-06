@@ -4,6 +4,7 @@ describe('Directive: searchItem', function () {
 
   // load the directive's module
   beforeEach(module('spotifyApp'));
+  beforeEach(module('foo'));
 
   var element,
     scope;
@@ -12,9 +13,10 @@ describe('Directive: searchItem', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('should check template if loaded', inject(function ($compile) {
     element = angular.element('<search-item></search-item>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the searchItem directive');
+    $compile(element)(scope);
+    scope.$digest();
+    expect(element.html()).toContain('<h4 class="media-heading ng-binding"></h4>');
   }));
 });

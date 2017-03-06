@@ -4,6 +4,7 @@ describe('Directive: searchBar', function () {
 
   // load the directive's module
   beforeEach(module('spotifyApp'));
+  beforeEach(module('foo'));
 
   var element,
     scope;
@@ -12,9 +13,12 @@ describe('Directive: searchBar', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('should check template if loaded', inject(function ($compile) {
     element = angular.element('<search-bar></search-bar>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the searchBar directive');
+    $compile(element)(scope);
+    scope.$digest();
+    expect(element.html()).toContain('<input type="text" placeholder="Search..." ng-change="submit()" ng-model="query"');
   }));
+
+
 });

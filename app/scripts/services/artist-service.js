@@ -13,26 +13,29 @@ angular.module('spotifyApp')
     // ...
 
     function get(id){
-      let d = $q.defer();
-      $http.get(`${apiUrl}/artists/${id}`).then(res=>{
+      var d = $q.defer();
+      $http.get(apiUrl + "/artists/" + id).then(function(res){
         d.resolve(res.data);
-      },err=>{
-        d.reject(res.data);
+      },function(err){
+        d.reject(err);
       })
       return d.promise;
     }
 
-    function getAlbums(id, page=0, limit=5){
+    function getAlbums(id, page, limit){
+      page = page || 0;
+      limit = limit || 5;
+
       var config = {
         params: {
           offset: page*limit,
-          limit
+          limit: limit
         }
       }
-      let d = $q.defer();
-      $http.get(`${apiUrl}/artists/${id}/albums`, config).then(res=>{
+      var d = $q.defer();
+      $http.get(apiUrl+ "/artists/" + id + "/albums", config).then(function(res){
         d.resolve(res.data);
-      }, err=>{
+      }, function(err){
         d.reject(err);
       })
       return d.promise;

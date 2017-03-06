@@ -13,11 +13,12 @@ angular.module('spotifyApp')
       restrict: 'E',
       replace: true,
       link: function postLink(scope, element, attrs) {
-        const t = {
+        var t = {
           artist: 'artists',
           album: 'albums'
         }
         scope.button = {};
+        scope.loading = {}
         scope.$location = $location;
 
         scope.$watch('$location.path()', function(locationPath) {
@@ -30,7 +31,7 @@ angular.module('spotifyApp')
             scope.model = null;
             return false;
           }
-          searchService.search(scope.query).then(res=>{
+          searchService.search(scope.query).then(function(res){
             scope.model = res;
             scope.button.artist = true;
             scope.button.album = true;
@@ -38,13 +39,14 @@ angular.module('spotifyApp')
         };
 
         scope.more = function(type){
-          let data = scope.model[t[type]];
-          let offset = data.offset+data.limit;
-
-          searchService.byType(type, scope.query, data.limit, offset).then(res=>{
-            let model = scope.model[t[type]];
-            let result = res.data[t[type]];
-            let items  = [...model.items, ...result.items];
+          var data = scope.model[t[type]];
+          var offset = data.offset+data.limit;
+          scope.loading[type] = true;
+          searchService.byType(type, scope.query, data.limit, offset).then(function(res){
+            var model = scope.model[t[type]];
+            var result = res.data[t[type]];
+            var items  = model.items.concat(result.items);
+            scope.loading[type] = false;
 
             if(result.offset + result.limit >= result.total){
               scope.button[type] = false;

@@ -1,23 +1,39 @@
 'use strict';
 
 describe('Controller: ArtistCtrl', function () {
+  var $controller,
+  $scope,
+  $q,
+  $httpBackend,
+  deferred,
+  $location;
 
   // load the controller's module
   beforeEach(module('spotifyApp'));
 
-  var ArtistCtrl,
-    scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    ArtistCtrl = $controller('ArtistCtrl', {
-      $scope: scope
-      // place here mocked dependencies
-    });
+  beforeEach(inject(function (_$controller_, _$q_, _$rootScope_, _$location_, _$httpBackend_, artistService) {
+    $controller = _$controller_;
+    $location = _$location_;
+    $scope = _$rootScope_.$new();
+    $q = _$q_;
+
+
+    $controller('ArtistCtrl', { $scope: $scope, artistService: artistService });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(ArtistCtrl.awesomeThings.length).toBe(3);
+
+  it('should change param page', function() {
+    $scope.currentPage = 1;
+    $scope.pageChanged();
+    expect($location.search()).toEqual({page: 1});
   });
+
+
+  it('should exist pageChanged()', function() {
+    expect($scope.pageChanged).toBeDefined();
+  });
+
+
 });

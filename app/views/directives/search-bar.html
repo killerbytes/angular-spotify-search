@@ -1,6 +1,6 @@
 <div class="search-bar">
   <input type="text" placeholder="Search..." ng-change="submit()" ng-model="query" ng-model-options="{ allowInvalid: true, debounce: 200 }">
-  <div ng-show="model" class="results">
+  <div ng-if="query" ng-show="model" class="results">
     <div ng-show="model.artists.items">
       <h4>Artists</h4>
       <ul>
@@ -15,6 +15,7 @@
       <div ng-if="model.artists.total > 5">
         <a class="show-more" ng-if="button.artist" ng-click="more('artist')">Show more...</a>
       </div>
+      <div ng-if="loading.artist" class="loader"></div>
     </div>
     <div ng-show="model.albums.items">
       <h4>Albums</h4>
