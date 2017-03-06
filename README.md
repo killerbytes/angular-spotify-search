@@ -1,7 +1,6 @@
 # spotify
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.16.0.
+http://azd-spotify-search.s3-website-us-west-2.amazonaws.com/
 
 ## Build & development
 
